@@ -19,39 +19,22 @@ class ContaEspecial {
         return $this->titular;
     }
 
-    public function setTitular($titular) {
-        $this->titular = $titular;
-    }
-
     public function getNumeroDaConta() {
         return $this->numeroDaConta;
-    }
-
-    public function setNumeroDaConta($numeroDaConta) {
-        $this->numeroDaConta = $numeroDaConta;
     }
 
     public function getSaldo() {
         return $this->saldo;
     }
 
-    public function setSaldo($saldo) {
-        $this->saldo = (float)$saldo;
-    }
-
     public function getLimite() {
         return $this->limite;
-    }
-
-    public function setLimite($limite) {
-        $this->limite = (float)$limite;
     }
 
     public function depositar($valor) {
         $valor = (float)$valor;
         if ($valor > 0) {
             $this->saldo += $valor;
-            return "Depósito realizado com sucesso.";
         } else {
             return "O valor do depósito deve ser positivo.";
         }
@@ -67,14 +50,13 @@ class ContaEspecial {
         }
     }
 
-    // Método para exibir todos os dados da conta
     public function exibirDadosConta() {
         return sprintf(
-            "Conta Especial\nTitular: %s\nNúmero da Conta: %s\nSaldo: R$ %.2f\nLimite: R$ %.2f\n",
+            "=== Informações da Conta Especial ===\nTitular: %s\nNúmero da Conta: %s\nSaldo: R$ %s\nLimite: R$ %s\n",
             $this->titular,
             $this->numeroDaConta,
-            $this->saldo,
-            $this->limite
+            number_format($this->saldo, 2, ',', '.'),
+            number_format($this->limite, 2, ',', '.')
         );
     }
 }
