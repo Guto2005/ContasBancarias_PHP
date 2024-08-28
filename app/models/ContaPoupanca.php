@@ -47,7 +47,17 @@ class ContaPoupanca {
     public function setDataAniversario($dataAniversario) {
         $this->dataAniversario = $dataAniversario;
     }
-}
 
+    // Método para exibir todos os dados da conta
+    public function exibirDadosConta() {
+        return sprintf(
+            "Conta Poupança\nTitular: %s\nNúmero da Conta: %s\nSaldo: R$ %.2f\nData de Aniversário: %s\n",
+            $this->titular,
+            $this->numeroConta,
+            $this->saldo,
+            $this->dataAniversario
+        );
+    }
+}
 
 

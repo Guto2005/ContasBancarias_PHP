@@ -66,5 +66,16 @@ class ContaEspecial {
             return "Saldo insuficiente ou valor inválido para saque.";
         }
     }
+
+    // Método para exibir todos os dados da conta
+    public function exibirDadosConta() {
+        return sprintf(
+            "Conta Especial\nTitular: %s\nNúmero da Conta: %s\nSaldo: R$ %.2f\nLimite: R$ %.2f\n",
+            $this->titular,
+            $this->numeroDaConta,
+            $this->saldo,
+            $this->limite
+        );
+    }
 }
 
