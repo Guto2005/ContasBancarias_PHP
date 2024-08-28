@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-class Especial {
+class ContaEspecial {
     private $titular;
     private $numeroDaConta;
     private $saldo;
@@ -51,8 +51,9 @@ class Especial {
         $valor = (float)$valor;
         if ($valor > 0) {
             $this->saldo += $valor;
+            return "Depósito realizado com sucesso.";
         } else {
-            echo "O valor do depósito deve ser positivo.";
+            return "O valor do depósito deve ser positivo.";
         }
     }
 
@@ -62,8 +63,7 @@ class Especial {
             $this->saldo -= $valor;
             return true;
         } else {
-            echo "Saldo insuficiente ou valor inválido para saque.";
-            return false;
+            return "Saldo insuficiente ou valor inválido para saque.";
         }
     }
 }

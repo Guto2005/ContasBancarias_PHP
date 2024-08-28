@@ -2,26 +2,19 @@
 
 namespace app\models;
 
-class Poupanca {
+class ContaPoupanca {
     private $titular;
     private $numeroConta;
     private $saldo;
     private $dataAniversario;
 
-    public function __construct() {
-        $this->titular = '';
-        $this->numeroConta = '';
-        $this->saldo = 0.0;
-        $this->dataAniversario = null;
-    }
-
-    public function __constructWithValues($titular, $numeroConta, $saldo, $dataAniversario) {
+    // Construtor que permite inicializar com valores
+    public function __construct($titular = '', $numeroConta = '', $saldo = 0.0, $dataAniversario = null) {
         $this->titular = $titular;
         $this->numeroConta = $numeroConta;
         $this->saldo = (float)$saldo;
         $this->dataAniversario = $dataAniversario;
     }
-
 
     public function getTitular() {
         return $this->titular;
@@ -55,5 +48,6 @@ class Poupanca {
         $this->dataAniversario = $dataAniversario;
     }
 }
+
 
 
