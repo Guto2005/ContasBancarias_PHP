@@ -51,13 +51,12 @@ class ContaEspecial {
     }
 
     public function exibirDadosConta() {
-        return sprintf(
-            "=== Informações da Conta Especial ===\nTitular: %s\nNúmero da Conta: %s\nSaldo: R$ %s\nLimite: R$ %s\n",
-            $this->titular,
-            $this->numeroDaConta,
-            number_format($this->saldo, 2, ',', '.'),
-            number_format($this->limite, 2, ',', '.')
-        );
+        return "=== Informações da Conta Especial ===\n" .
+               "Titular: " . $this->titular . "\n" .
+               "Número da Conta: " . $this->numeroDaConta . "\n" .
+               "Saldo: R$ " . number_format($this->saldo, 2, ',', '.') . "\n" .
+               "Limite: R$ " . number_format($this->limite, 2, ',', '.') . "\n";
     }
 }
+
 

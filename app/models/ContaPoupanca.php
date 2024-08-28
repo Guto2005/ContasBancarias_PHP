@@ -31,15 +31,36 @@ class ContaPoupanca {
         return $this->dataAniversario;
     }
 
+    public function depositar($valor) {
+        $valor = (float)$valor;
+        if ($valor > 0) {
+            $this->saldo += $valor;
+        } else {
+            return "O valor do depósito deve ser positivo.";
+        }
+    }
+
+    public function sacar($valor) {
+        $valor = (float)$valor;
+        if ($valor > 0 && $valor <= $this->saldo) {
+            $this->saldo -= $valor;
+            return true;
+        } else {
+            return "Saldo insuficiente ou valor inválido para saque.";
+        }
+    }
+
     public function exibirDadosConta() {
-        return sprintf(
-            "=== Informações da Conta Poupança ===\nTitular: %s\nNúmero da Conta: %s\nSaldo: R$ %s\nData de Aniversário: %s\n",
-            $this->titular,
-            $this->numeroConta,
-            number_format($this->saldo, 2, ',', '.'),
-            $this->dataAniversario
-        );
+        return "=== Informações da Conta Poupança ===\n" .
+               "Titular: " . $this->titular . "\n" .
+               "Número da Conta: " . $this->numeroConta . "\n" .
+               "Saldo: R$ " . number_format($this->saldo, 2, ',', '.') . "\n" .
+               "Data de Aniversário: " . $this->dataAniversario . "\n";
     }
 }
+
+
+
+
 
 
