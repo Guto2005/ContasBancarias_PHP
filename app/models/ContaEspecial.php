@@ -2,16 +2,12 @@
 
 namespace app\models;
 
-
-
-
 class Especial {
     private $titular;
     private $numeroDaConta;
     private $saldo;
     private $limite;
 
-    // Construtor customizado
     public function __construct($titular, $numeroDaConta, $saldo, $limite) {
         $this->titular = $titular;
         $this->numeroDaConta = $numeroDaConta;
@@ -19,7 +15,6 @@ class Especial {
         $this->limite = (float)$limite;
     }
 
-    // Getters e Setters
     public function getTitular() {
         return $this->titular;
     }
@@ -52,7 +47,6 @@ class Especial {
         $this->limite = (float)$limite;
     }
 
-    // Métodos para depositar e sacar
     public function depositar($valor) {
         $valor = (float)$valor;
         if ($valor > 0) {
