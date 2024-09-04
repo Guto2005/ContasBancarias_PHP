@@ -4,13 +4,13 @@ namespace app\models;
 
 class ContaPoupanca {
     private $titular;
-    private $numeroConta;
+    private $numeroDaConta;
     private $saldo;
     private $dataAniversario;
 
-    public function __construct($titular = '', $numeroConta = '', $saldo = 0.0, $dataAniversario = null) {
+    public function __construct($titular, $numeroDaConta, $saldo, $dataAniversario) {
         $this->titular = $titular;
-        $this->numeroConta = $numeroConta;
+        $this->numeroDaConta = $numeroDaConta;
         $this->saldo = (float)$saldo;
         $this->dataAniversario = $dataAniversario;
     }
@@ -19,8 +19,8 @@ class ContaPoupanca {
         return $this->titular;
     }
 
-    public function getNumeroConta() {
-        return $this->numeroConta;
+    public function getNumeroDaConta() {
+        return $this->numeroDaConta;
     }
 
     public function getSaldo() {
@@ -35,8 +35,6 @@ class ContaPoupanca {
         $valor = (float)$valor;
         if ($valor > 0) {
             $this->saldo += $valor;
-        } else {
-            return "O valor do depósito deve ser positivo.";
         }
     }
 
@@ -50,14 +48,29 @@ class ContaPoupanca {
         }
     }
 
+    public function transferir($valor, ContaPoupanca $contaDestino) {
+        $valor = (float)$valor;
+        if ($valor > 0 && $valor <= $this->saldo) {
+            $this->saldo -= $valor;
+            $contaDestino->depositar($valor);
+            return true;
+        } else {
+            return "Saldo insuficiente ou valor inválido para transferência.";
+        }
+    }
+
     public function exibirDadosConta() {
         return "=== Informações da Conta Poupança ===\n" .
                "Titular: " . $this->titular . "\n" .
-               "Número da Conta: " . $this->numeroConta . "\n" .
+               "Número da Conta: " . $this->numeroDaConta . "\n" .
                "Saldo: R$ " . number_format($this->saldo, 2, ',', '.') . "\n" .
                "Data de Aniversário: " . $this->dataAniversario . "\n";
     }
 }
+
+
+
+
 
 
 

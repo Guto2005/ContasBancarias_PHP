@@ -1,37 +1,56 @@
-<?php 
+<?php
 
 require __DIR__ . "/app/models/ContaEspecial.php";
 require __DIR__ . "/app/models/ContaPoupanca.php";
 
-// Uso dos namespaces corretos
 use app\models\ContaEspecial;
 use app\models\ContaPoupanca;
 
-// Testando a classe ContaEspecial
-$contaEspecial = new ContaEspecial('João Silva', '12345', 1000.50, 500.00);
-$contaEspecial->depositar(200.00); // Deposita 200
-$resultadoSaqueEspecial = $contaEspecial->sacar(1000.00); // Tenta sacar 1500
+$contaEspecial1 = new ContaEspecial('João Silva', '12345', 1000.50, 500.00);
+$contaEspecial2 = new ContaEspecial('Ana Souza', '67890', 500.00, 300.00);
+$contaEspecial1->depositar(200.00);
+$resultadoTransferenciaEspecial = $contaEspecial1->transferir(1000.00, $contaEspecial2);
 
-// Exibindo dados da conta especial
-echo $contaEspecial->exibirDadosConta();
-if ($resultadoSaqueEspecial !== true) {
-    echo "Erro: " . $resultadoSaqueEspecial . "\n";
+echo "<html><body>";
+
+echo "<h2>=== Informações da Conta Especial João Silva ===</h2>";
+echo "<pre>" . $contaEspecial1->exibirDadosConta() . "</pre>";
+if ($resultadoTransferenciaEspecial !== true) {
+    echo "<p>Erro: " . htmlspecialchars($resultadoTransferenciaEspecial) . "</p>";
 }
-echo "Saldo após tentativa de saque (João Silva): R$ " . number_format($contaEspecial->getSaldo(), 2, ',', '.') . "\n";
-echo "\n";
+echo "<p>Saldo após tentativa de transferência para Ana Souza: R$ " . number_format($contaEspecial1->getSaldo(), 2, ',', '.') . "</p>";
 
-// Testando a classe ContaPoupanca
-$contaPoupanca = new ContaPoupanca('Maria Oliveira', '98765', 1500.75, '2024-08-28');
-$contaPoupanca->depositar(500.00); // Deposita 500
-$resultadoSaquePoupanca = $contaPoupanca->sacar(1600.00); // Tenta sacar 1600
+echo "<br>";
 
-// Exibindo dados da conta poupança
-echo $contaPoupanca->exibirDadosConta();
-if ($resultadoSaquePoupanca !== true) {
-    echo "Erro: " . $resultadoSaquePoupanca . "\n";
+echo "<h2>=== Informações da Conta Especial Ana Souza ===</h2>";
+echo "<pre>" . $contaEspecial2->exibirDadosConta() . "</pre>";
+
+echo "<br>";
+
+$contaPoupanca1 = new ContaPoupanca('Maria Oliveira', '98765', 1500.75, '2024-08-28');
+$contaPoupanca2 = new ContaPoupanca('Pedro Almeida', '54321', 200.00, '2025-05-15');
+$contaPoupanca1->depositar(500.00);
+$resultadoTransferenciaPoupanca = $contaPoupanca1->transferir(1000.00, $contaPoupanca2);
+
+echo "<h2>=== Informações da Conta Poupança Maria Oliveira ===</h2>";
+echo "<pre>" . $contaPoupanca1->exibirDadosConta() . "</pre>";
+if ($resultadoTransferenciaPoupanca !== true) {
+    echo "<p>Erro: " . htmlspecialchars($resultadoTransferenciaPoupanca) . "</p>";
 }
+echo "<p>Saldo após tentativa de transferência para Pedro Almeida: R$ " . number_format($contaPoupanca1->getSaldo(), 2, ',', '.') . "</p>";
 
+echo "<br>";
+
+echo "<h2>=== Informações da Conta Poupança Pedro Almeida ===</h2>";
+echo "<pre>" . $contaPoupanca2->exibirDadosConta() . "</pre>";
+
+echo "</body></html>";
 ?>
+
+
+
+
+
 
 
 

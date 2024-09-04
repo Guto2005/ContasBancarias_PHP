@@ -35,8 +35,6 @@ class ContaEspecial {
         $valor = (float)$valor;
         if ($valor > 0) {
             $this->saldo += $valor;
-        } else {
-            return "O valor do depósito deve ser positivo.";
         }
     }
 
@@ -50,6 +48,17 @@ class ContaEspecial {
         }
     }
 
+    public function transferir($valor, ContaEspecial $contaDestino) {
+        $valor = (float)$valor;
+        if ($valor > 0 && $valor <= $this->saldo + $this->limite) {
+            $this->saldo -= $valor;
+            $contaDestino->depositar($valor);
+            return true;
+        } else {
+            return "Saldo insuficiente ou valor inválido para transferência.";
+        }
+    }
+
     public function exibirDadosConta() {
         return "=== Informações da Conta Especial ===\n" .
                "Titular: " . $this->titular . "\n" .
@@ -58,6 +67,9 @@ class ContaEspecial {
                "Limite: R$ " . number_format($this->limite, 2, ',', '.') . "\n";
     }
 }
+
+
+
 
 
 
